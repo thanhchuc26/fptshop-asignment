@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/admin.html}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content" class="offset-2 col-8">
+		<div th:if="${message != null}">
+			<h3 th:text="${message}"></h3>
+		</div>
+		<form th:action="@{/departs/saveOrUpdate}" method="post" th:object="${depart}">
+			<div th:if="${id > 0}" class="form-group">
+				<label for="departId">Department ID</label>
+				<input th:field="*{id}" placeholder="Department ID" class="form-control"/> 
+			</div>
+			<div class="form-group">
+				<label for="name">Name:</label>
+				<input type="text" th:field="*{name}" placeholder="Name" class="form-control"/>	
+			</div>
+			<div class="form-group">
+			 	<input type="submit" value="Add" th:if="${id <= 0}" class="btn btn-primary"/>
+				<input type="submit" value="Update" th:if="${id > 0}" class="btn btn-primary"/>
+			</div>
+			
+			<a th:href="@{/departs/add}" class="btn btn-primary">New</a> |
+			<a th:href="@{/departs/list}" class="btn btn-secondary">List Departments</a>
+		</form>
+	</div>
+</body>
+</html>
